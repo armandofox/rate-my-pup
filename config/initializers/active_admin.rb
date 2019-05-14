@@ -1,11 +1,10 @@
 ActiveAdmin.setup do |config|
-
   # == Site Title
   #
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Ratemypup"
+  config.site_title = "SimpaticoPup"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -57,7 +56,6 @@ ActiveAdmin.setup do |config|
   # within the controller.
   config.authentication_method = :authenticate_admin_user!
 
-
   # == Current User
   #
   # Active Admin will associate actions with the current
@@ -100,7 +98,11 @@ ActiveAdmin.setup do |config|
   # Admin comments are enabled by default.
   #
   # Default:
-  config.comments = false
+  config.comments = true
+  
+  # for iter 2
+  config.show_comments_in_menu = false
+  
   #
   # You can turn them on and off for any given namespace by using a
   # namespace config block.
@@ -140,7 +142,9 @@ ActiveAdmin.setup do |config|
   #   config.register_stylesheet 'my_print_stylesheet.css', :media => :print
   #
   # To load a javascript file:
-  #   config.register_javascript 'my_javascript.js'
+  config.register_javascript 'https://www.google.com/jsapi'
+  config.register_javascript 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js'
+  config.register_javascript 'countup.js'
 
 
   # == CSV options
@@ -196,7 +200,7 @@ ActiveAdmin.setup do |config|
   # Pagination is enabled by default for all resources.
   # You can control the default per page count for all resources here.
   #
-  # config.default_per_page = 30
+  config.default_per_page = 100
 
 
   # == Filters
@@ -206,6 +210,4 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
-
-
 end

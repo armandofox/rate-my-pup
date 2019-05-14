@@ -1,88 +1,91 @@
 %body{:id=>"background"}
     %section{:class => "find_pup"}
         //TOP PART (Tagline, Buttons)
-        %div{:class => "row top"}
-            %div{:class => "row tagline col-lg-12"}
-                %h1{:id => "titleline"}
-                    Information to improve the dogs in our lives, and the lives of our dogs
-                %h2{:id => "tagline-text"} 
-                    Find a pup from a <strong>reliable</strong> source
-                    //First Row 
-            %div{:class => "row col-lg-12"}
-                %div{:class => "col-lg-4 box-a text-center"}
-                    %a{:class => "main-button-link button-a", :href => "pups/dog_name"}
-                        %div{:class => "main-button"}
-                            %div{:class => "main-button-small-text"}
-                                Rate your
-                            %div{:class => "main-button-large-text"}
-                                Dog
-                %div{:class => "col-lg-4 box-b box-move hidden"}
-                    %div{:class => "panel panel-default"}
-                        %div{:class => "panel-heading"}
-                            %h3{:class => "panel-title"}
-                                Search for ratings by breed:
-                                %span{:id => "cancel-b"}
-                                    %a{:class => "cancel"} &#10006;
-                        %div{:class => "panel-body"}
-                            =label :pup, "Please indicate the breed you are looking for"
-                            = form_tag breed_path, :method => :get, :class => "form-horizontal", :autocomplete => "off" do
-                                %div{:class => "form-group great text-center", :class => "sub-title"}
-                                    = text_field :breed, :name, :class => "form-control", :id => "breed_find", :placeholder => "Breed Name"
-                                %div{:id => 'breed_autofills', :class => "form-group col-md-12"}
-                                %div{:class => "form-group", :class => "button-positioning"}
-                                    = submit_tag 'Find ratings for this breed', :id => 'Find Breed', :class => "form-control"
-                %div{:class => "col-lg-4 box-b text-center"}
-                    %a{:class => "main-button-link button-b"}
-                        %div{:class => "main-button"}
-                            %div{:class => "main-button-small-text"}
-                                Find Ratings for a
-                            %div{:class => "main-button-large-text"}
-                                Breed
-                %div{:class => "col-lg-4 box-c box-move hidden"}
-                    %div{:class => "panel panel-default"}
-                        %div{:class => "panel-heading"}
-                            %h3{:class => "panel-title"}
-                                Find a breeder or kennel by name:
-                                %span{:id => "cancel-c"}
-                                    %a{:class => "cancel"} &#10006;
-                        %div{:class => "panel-body"}
-                            = form_tag breeder_search_path, :method => :get, :class => "form-horizontal", :autocomplete => "off" do
-                                %div{:class => "form-group", :class => "homepage-div"}
-                                    = text_field :breeder, :name, :class => "form-control", :id => "breeder_find", :placeholder => "Breeder Name"
-                                    %div{:id => 'breeder_find_autofills', :class => "list-group"}
+        %div{:class => "row_top", :style => "position: absolute; width: 100%"}
+            %div{:class => "container_inline", :id => "jackSB"}
+                %h5{:id => "inline_text_header"} #{transition_title}
+                %hr{:class => "light"}
+                %p{:class => "text_faded"} #{transition_body}
+            %div{:class => "page_container"}
+                %div{:id => "main_page_buttons"}
+                    %div{:class => "col-sm-3 box-a text-center", :id => "button1_main"}
+                        %a{:class => "main-button-link button-a", :href => "pups/dog_name"}
+                            
+                            %div{:class => "button-small-text", :style => "color: black; opacity: 0.6"} #{rate_dog_top} 
+                            %div{:class => "button-large-text", :style => "color: black"} #{rate_Dog_bottom}
+                    %div{:class => "divider1"}
+                    %div{:class => "col-sm-3 box-b box-move hidden"}
+                        %div{:class => "panel panel-default", :style => "margin-top: 100px;"}
+                            %div{:class => "panel-heading"}
+                                %h3{:class => "panel-title"}
+                                    Search for ratings by breed:
+                                    %span{:id => "cancel-b"}
+                                        %a{:class => "cancel"} &#10006;
+                            %div{:class => "panel-body"}
+                                =label :pup, "Please indicate the breed you are looking for"
+                                = form_tag breed_path, :method => :get, :class => "form-horizontal", :autocomplete => "off" do
+                                    %div{:class => "form-group great text-center", :class => "sub-title"}
+                                        = text_field :breed, :name, :class => "form-control", :id => "breed_find", :placeholder => "Breed Name"
+                                    %div{:id => 'breed_autofills', :class => "form-group col-md-12"}
                                     %div{:class => "form-group", :class => "button-positioning"}
-                                        = submit_tag 'Find ratings for this breeder', :id => 'Find Breeder', :class => "form-control"
-                %div{:class => "col-lg-4 box-c text-center"}
-                    %a{:class => "main-button-link button-c"}
-                        %div{:class => "main-button"}
-                            %div{:class => "main-button-small-text"}
-                                Find Ratings for a 
-                            %div{:class => "main-button-large-text"}
-                                Breeder
-    //Second Row
-    %div{:class => "row"}
-        %section{:class => "comment-of-the-day"}
-            %div{:class => "row col-lg-12"}
-                %header{:class => "span24"}
-                    %h2 Comment of the Day
-                    %h3= "\"#{@comment_content}\""
-                    %h3= "---- #{@comment_user}"
-    //Third Row
-    -#%div{:class => "row"}
-    -#    %section{:class => "ads"}
-    -#        %div{:class=>"row col-lg-12"}
-    -#            %div{:class => "col-lg-4 box-a text-center"}
-    -#                %div{:class => "ad-box-a"}
-    -#            %div{:class => "col-lg-4 box-a text-center"}
-    -#                %div{:class => "ad-box-b"}
-    -#            %div{:class => "col-lg-4 box-a text-center"}
-    -#                %div{:class => "ad-box-c"}
-    //CONTACT INFO
+                                        = submit_tag 'Find ratings for this breed', :id => 'Find Breed', :class => "form-control"
+                    %div{:class => "col-sm-3 box-b text-center", :id => "button2_main"}
+                        %a{:class => "main-button-link button-b", :style => "cursor:pointer" }
+                            
+                            %div{:class => "button-small-text", :style => "color: black; opacity: 0.6"} #{find_breed_top} 
+                            %div{:class => "button-large-text", :style => "color: black;"} #{find_breed_bottom}
+                    %div{:class => "divider2"}
+                    %div{:class => "col-sm-3 box-c box-move hidden"}
+                        %div{:class => "panel panel-default", :style => "margin-top: 100px;"}
+                            %div{:class => "panel-heading"}
+                                %h3{:class => "panel-title"}
+                                    Find a breeder or kennel by name:
+                                    %span{:id => "cancel-c"}
+                                        %a{:class => "cancel"} &#10006;
+                            %div{:class => "panel-body"}
+                                = form_tag breeder_search_path, :method => :get, :class => "form-horizontal", :autocomplete => "off" do
+                                    %div{:class => "form-group", :class => "homepage-div"}
+                                        = text_field :breeder, :name, :class => "form-control", :id => "breeder_find", :placeholder => "Breeder Name"
+                                        %div{:id => 'breeder_find_autofills', :class => "list-group"}
+                                        %div{:class => "form-group", :class => "button-positioning"}
+                                            = submit_tag 'Find ratings for this breeder', :id => 'Find Breeder', :class => "form-control"
+                    %div{:class => "col-sm-3 box-c text-center", :id => "button3_main"}
+                        %a{:class => "main-button-link button-c", :style => "cursor:pointer"}
+                           
+                            %div{:class => "button-small-text", :style => "color: black; opacity: 0.6"} #{find_breeder_top}
+                            %div{:class => "button-large-text", :style => "color: black;"} #{find_breeder_bottom}
+                    %div{:class => "divider3"}
+                    %div{:class => "col-sm-3 box-d text-center", :id => "button4_main"}
+                        %a{:class => "main-button-link button-d", :href => "/search_nearer_breeders"}
+            
+                            %div{:class => "button-small-text", :style => "color: black; opacity: 0.6"} #{search_breeder_top} 
+                            %div{:class => "button-large-text", :style => "color: black;"} #{search_breeder_bottom}
+    %div{:class => "page_divider3"}
+        %div{:class => "slider"}
+            %h1{:id => "comment_title"} #{comment_title}
+            %h2{:id => "tagline-text_comment"} 
+                = "\"#{@comment_content}\""
+            %h3{:id => "tagline-text_breed"}
+                = "---- #{@comment_breed}"
+            %a.prev{:id => "arrow_left"} ❮
+            %a.next{:id => "arrow_right"} ❯
+        
+        
+        %br
+        %br
+        
     %div{:class => "row navbar-fixed-bottom"}
         %div{:class => "col-md-12 contact contact-text-sm"}
-            %div{:class => "col-sm-6"}
-                %p For More Information on Breed Health: 
-                = link_to 'Canine Health Information Center', 'http://www.caninehealthinfo.org/', :id => "contact-link"
-            %div{:class => "col-sm-6"}
-                %p Contact Info
-                = link_to "LSandersDVM@gmail.com", 'mailto:LSandersDVM@gmail.com', :class=>"contact-link"
+            %div{:class =>"col-sm-4"}
+                %p{:class => "no_padding"}= top_left
+                = link_to bot_left,'http://www.caninehealthinfo.org/', :class => "contact-link" 
+                
+            %div{:class =>"col-sm-4"}
+                %p{:class => "no_padding"}= link_to top_mid, privacy_policy_path, :class=>"contact-link"
+                %p{:class => "no_padding"}= link_to bot_mid, terms_of_service_path, :class=>"contact-link"
+                
+            %div{:class =>"col-sm-4"}
+                %p{:class => "no_padding"}= top_right
+                = link_to bot_right, 'mailto:LSandersDVM@gmail.com', :class=>"contact-link"
+  
+// End of Iter3-2

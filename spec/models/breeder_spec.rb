@@ -8,10 +8,10 @@ describe Breeder do
       @breeder.pups.should == pups
     end
     it "should get the average ratings for each pup" do
-      results_hash = {:overall_health => 1, :trainability => 1, :social_behavior => 1,
-                      :energy_level => 1, :simpatico_rating => 1, :breeder_responsibility => 1}
+      results_hash = {:overall_health => 1.0, :trainability => 1.0, :social_behavior => 1.0,
+                      :dog_behavior => 1.0, :energy_level => 1.0, :simpatico_rating => 1.0, :breeder_responsibility => 1.0}
       @breeder.pups.each do |pup|
-        results_hash.each{|k,v| pup.should_receive(k).and_return(1)}
+        results_hash.each{|k,v| pup.send(k).should == 1.0}
       end
       @breeder.avg_pup_rating.should == results_hash
     end
@@ -19,6 +19,7 @@ describe Breeder do
   
   describe "find all matching breeders" do
     before :each do
+      unknown_breeder = FactoryGirl.create(:breeder, :name => "Unknown")
       @breeders = (1..10).map { |i| FactoryGirl.create(:breeder) }
       @other_breeders = (1..5).map { |i| FactoryGirl.create(:breeder, :name => "Tedus") }
       @pups = (1..10).map {|i| FactoryGirl.create(:pup, :breeder_id => @breeders[i-1].id)}
@@ -37,6 +38,9 @@ describe Breeder do
         Breeder.find_by_substring("Teddy").each do |breeder|
           assert(@breeders.include?(breeder), "Breeder not in the 'Teddy' breeders array")
         end
+      end
+      it "should find every breeders with substr T" do
+        Breeder.find_by_substring("T").should == @breeders + @other_breeders
       end
     end
     describe "find by type of dog breed" do
@@ -77,6 +81,7 @@ describe Breeder do
   end
   describe "validate a breeder" do
     before :each do
+      unknown_breeder = FactoryGirl.create(:breeder, :name => "Unknown")
       breeder = FactoryGirl.create(:breeder, :name=>"John")
     end
     it "should return true if breeder name is valid" do
@@ -96,6 +101,31 @@ describe Breeder do
     end
     it "shuold show empty string if city and state info not exist" do
       @breeder_without_address.address.should eq("")
+    end
+  end
+  
+  describe "find breeder by using formatted string" do
+    before :each do
+     @breeder_with_address = FactoryGirl.create(:breeder, :name=>"John", :city=>"Berkeley", :state=>"CA")
+    end
+    Breeder.find_by_formatted_string("John - Berkeley, CA").should == @breeder_with_address
+  end
+  
+  describe "dismentle some pups" do
+    before :each do
+      @breeder = FactoryGirl.create(:breeder)
+      pups = 10.times.collect  { |i| FactoryGirl.create(:pup, :breeder_id => @breeder.id)}
+    end
+    it "should get the average ratings for each pup" do
+      results_hash = {:overall_health => 1.0, :trainability => 1.0, :social_behavior => 1.0,
+                      :dog_behavior => 1.0, :energy_level => 1.0, :simpatico_rating => 1.0, :breeder_responsibility => 1.0}
+      @breeder.pups.each do |pup|
+        results_hash.each{|k,v| pup.send(k).should == 1.0}
+      end
+      @breeder.dismentle_pups
+      @breeder.pups.each do |pup|
+        pup.breeder_id.should eq 1
+      end
     end
   end
 end

@@ -1,24 +1,74 @@
 #encoding: utf-8
+#Iter3-2 Populate default layout into the database (By Gung Hiu Ho, Licong Wang)
+customizes = [
+  {:name => 'Site_Name', :content => 'SimpaticoPup', :location => "site_title" },
 
-pups = [{:pup_name => 'Chloe', :year => 1, :month => 0, :breeder_id => '1', :breed_id => '1', :breeder_responsibility => '5', :overall_health => '5', :trainability => '3', :social_behavior => '4', :dog_behavior => '4', :energy_level => '4', :simpatico_rating => '5'},
-  	 	{:pup_name => 'Spot', :year => 2, :month => 1, :breeder_id => '2', :breed_id => '1', :breeder_responsibility => '3', :overall_health => '3', :trainability => '3', :social_behavior => '3', :dog_behavior => '3', :energy_level => '3', :simpatico_rating => '3'},
-  	 	{:pup_name => 'Gypsy', :year => 0, :month => 6, :breeder_id => '1', :breed_id => '1', :breeder_responsibility => '5', :overall_health => '4', :trainability => '3', :social_behavior => '2', :dog_behavior => '2', :energy_level => '1', :simpatico_rating => '5'},
-  	 	{:pup_name => 'Jenny', :year => 1, :month => 0, :breeder_id => '2', :breed_id => '2', :breeder_responsibility => '3', :overall_health => '4', :trainability => '5', :social_behavior => '5', :dog_behavior => '5', :energy_level => '3', :simpatico_rating => '4'}]
+  {:name => 'Primary_Title', :content => 'Better Way to Find a Great Dog', :location => "main_title" },
+  {:name => 'Secondary_Title', :content => 'The SimpaticoPup website was created to help improve how companion puppies are produced,
+  and how they find their way to their forever homes.', :location => "main_title" },
+  {:name => 'Title_Button', :content => 'Find out more', :location => "main_title" },
 
-comments = [
-    {:content => 'great dog!', :pup_id => '1'},
-    {:content => 'love my dog!', :pup_id => '2'},
-    {:content => 'not very playful', :pup_id => '3'},
-    {:content => 'very well behaved!', :pup_id => '4'}]
+  {:name => 'Transition_Title', :content => 'Why are we doing this?', :location => "transition" },
+  {:name => 'Transition_Body', :content => 'Our mission is to create a database of user-generated content about companion dogs and dog breeders,
+    which will promote responsible dog breeding and help dog lovers find simpatico puppies with whom to share their homes and lives.', :location => "transition" },
+  {:name => 'Transition_Button', :content => 'Get Started', :location => "transition" },
+
+  {:name => 'Function_Title', :content => 'What We Provide', :location => "fuction" },
+  {:name => 'Function_leftmost_Top', :content => 'Rate your', :location => "fuction" },
+  {:name => 'Function_leftmost_Bottom', :content => 'Dog', :location => "fuction" },
+  {:name => 'Function_left_mid_Top', :content => 'Find Ratings for a', :location => "fuction" },
+  {:name => 'Function_left_mid_Bottom', :content => 'Breed', :location => "fuction" },
+  {:name => 'Function_right_mid_Top', :content => 'Find Ratings for a', :location => "fuction" },
+  {:name => 'Function_right_mid_Bottom', :content => 'Breeder', :location => "fuction" },
+  {:name => 'Function_rightmost_Top', :content => 'Search for a', :location => "fuction" },
+  {:name => 'Function_rightmost_Bottom', :content => 'Breeder', :location => "fuction" },
+
+
+  {:name => 'Blue_Bar_Top_Left', :content => 'For More Information on Breed Health', :location => "main_bar" },
+  {:name => 'Blue_Bar_Top_Middle', :content => 'Privacy Policy', :location => "main_bar" },
+  {:name => 'Blue_Bar_Top_Right', :content => 'Contact Info', :location => "main_bar" },
+  {:name => 'Blue_Bar_Bottom_Left', :content => 'Canine Health Information Center', :location => "main_bar" },
+  {:name => 'Blue_Bar_Bottom_Middle', :content => 'Terms of Service', :location => "main_bar" },
+  {:name => 'Blue_Bar_Bottom_Right', :content => 'LSandersDVM@gmail.com', :location => "main_bar" },
+
+  {:name => 'Comment_Title', :content => 'Featured Comment', :location => "message" },
+
+  {:name => 'Nav_Bar_1', :content => 'Mission', :location => "navigation_bar" },
+  {:name => 'Nav_Bar_2', :content => 'Background', :location => "navigation_bar" },
+  {:name => 'Nav_Bar_3', :content => 'Goals', :location => "navigation_bar" },
+  {:name => 'Nav_Bar_4', :content => 'How You Can Help', :location => "navigation_bar" },
+  {:name => 'Nav_Bar_5', :content => 'Community Forum', :location => "navigation_bar" },
+  {:name => 'Nav_Bar_6', :content => 'Feedback', :location => "navigation_bar" }]
+
+customizes.each do |customize|
+  Customize.create!(customize)
+end
+# End of Iter3-2
+
+# pups = [{:pup_name => 'Chloe', :year => 1, :month => 0, :breeder_id => '1', :breed_id => '1', :breeder_responsibility => '5', :overall_health => '5', :trainability => '3', :social_behavior => '4', :dog_behavior => '4', :energy_level => '4', :simpatico_rating => '5'},
+#   	 	{:pup_name => 'Spot', :year => 2, :month => 1, :breeder_id => '2', :breed_id => '1', :breeder_responsibility => '3', :overall_health => '3', :trainability => '3', :social_behavior => '3', :dog_behavior => '3', :energy_level => '3', :simpatico_rating => '3'},
+#   	 	{:pup_name => 'Gypsy', :year => 0, :month => 6, :breeder_id => '1', :breed_id => '1', :breeder_responsibility => '5', :overall_health => '4', :trainability => '3', :social_behavior => '2', :dog_behavior => '2', :energy_level => '1', :simpatico_rating => '5'},
+#   	 	{:pup_name => 'Jenny', :year => 1, :month => 0, :breeder_id => '2', :breed_id => '2', :breeder_responsibility => '3', :overall_health => '4', :trainability => '5', :social_behavior => '5', :dog_behavior => '5', :energy_level => '3', :simpatico_rating => '4'}]
+
+# comments = [
+#     {:content => 'great dog!', :pup_id => '1'},
+#     {:content => 'love my dog!', :pup_id => '2'},
+#     {:content => 'not very playful', :pup_id => '3'},
+#     {:content => 'very well behaved!', :pup_id => '4'}]
 
 breeders = [
       {:name => 'Unknown', :city => '', :state => ''},
-      {:name => 'Justin MacMillin', :city => "Porterville", :state => 'CA'},
-			{:name => 'Alex McGourty', :city => "San Francisco", :state => 'CA'}]
+#       {:name => 'Justin MacMillin', :city => "Porterville", :state => 'CA'},
+# 			{:name => 'Alex McGourty', :city => "San Francisco", :state => 'CA'}
+]
+
+# users = [{:email => 'admin@berkeley.edu', :encrypted_password => '123456789'}]
 
 texts = [
     {:title => "Mission", :body => 'Our Mission is to create a database of user-generated content about companion dogs and dog breeders, designed to help dog lovers find simpatico puppies with whom to share their homes and lives.'},
     {:title => "Background", :body => 'Chances are good that there is a dog at your feet as you read this, just as there is one at mine.  Dogs were probably the first species to be domesticated by humans around 15,000—30,000 years ago, and since then the histories of our two species have been closely intertwined. The association between humans and dogs began as one in which dogs served various utilitarian purposes such as guarding and hunting. Today, the vast majority of our dogs fill the role of family member and companion, as opposed to serving as working dogs. But even though most dogs no longer serve a practical role in our lives, the relationship between human and dog is certainly no less deep or meaningful. Pulitzer prize-winning biologist EO Wilson popularized the concept of biophilia to describe the powerful and subconscious urge that human beings have to connect with other forms of life, and nowhere is this urge better illustrated than the desire that many people have to spend their lives with a companion dog living in their home, at their side, and sharing almost every aspect of their lives.
+
+
 
     Just as the relationship between humans and dogs has changed in recent times, so has our means of producing and acquiring them. Few dogs today are bred for their working ability. Thanks to the widespread availability of spaying and neutering and an increased awareness of the problems of dog overpopulation, responsible dog owners no longer allow their dogs to breed randomly and indiscriminately, and produce unwanted litters. But too many dogs are irresponsibly bred by small time breeders who are just trying to turn a quick profit, or by large-scale puppy mills whose puppies are marketed online or through puppy wholesalers, without an easy way for puppy seekers to evaluate whether or not the dog breeder is ethical, humane, and breeding for good health and good temperament. Still other dogs are bred by breed fanciers who breed mainly for success in the dog show ring, and then cull their less desirable show stock to be sold as “pet quality” dogs.  Good health and good temperament are to a great degree heritable in dogs, and many dogs that are bred primarily for profit or for the show ring often fall short of the ideal in terms of health and temperament. The fact that a young puppy is cute and sweet and irresistibly appealing is no assurance that it will grow up to be a healthy, suitable companion dog. Far too many dog lovers discover the heartbreak of investing a huge amount of time, money and emotional involvement in a puppy that later turns out to have serious health or behavioral problems.
 
@@ -58,7 +108,7 @@ texts = [
 
     Dog lovers have the power to boycott irresponsible breeders, and to support only responsible breeders. If they do so, the number of irresponsible for-profit breeders will decline, the number of irresponsibly bred dogs that end up dumped into shelters as surplus inventory will decline, the health and temperament of our companion dogs will improve, and our relationships with them will be enriched.
   %center'},
-    {:title => "How You Can Help", :body => '1. If you have a purebred dog (or one of the common crossbreeds that we are also collecting information on), please contribute to our website by clicking on "Rate Your Dog". This website is designed to create a large searchable database of information that will help dog lovers identify responsible dog breeders who have a track record for producing puppies that become excellent companion dogs. This user-generated content will also quantify some important characteristics for various dog breeds. It will take just a few minutes to give us some basic information about your dog\'s breed, tell us where you acquired him/her, and evaluate your dog\'s health, temperament and behavior. This information will help empower others to make a responsible choice when they seek a new puppy, and optimize their chances of finding a simpatico pup with the good health and temperament that they are looking for. It will also encourage dog breeders to prioritize good health and temperament in the puppies they produce, and recognize those responsible dog breeders who have a track record of producing healthy, well-socialized, excellent companion dogs.
+    {:title => "How you can help", :body => '1. If you have a purebred dog (or one of the common crossbreeds that we are also collecting information on), please contribute to our website by clicking on "Rate Your Dog". This website is designed to create a large searchable database of information that will help dog lovers identify responsible dog breeders who have a track record for producing puppies that become excellent companion dogs. This user-generated content will also quantify some important characteristics for various dog breeds. It will take just a few minutes to give us some basic information about your dog\'s breed, tell us where you acquired him/her, and evaluate your dog\'s health, temperament and behavior. This information will help empower others to make a responsible choice when they seek a new puppy, and optimize their chances of finding a simpatico pup with the good health and temperament that they are looking for. It will also encourage dog breeders to prioritize good health and temperament in the puppies they produce, and recognize those responsible dog breeders who have a track record of producing healthy, well-socialized, excellent companion dogs.
 
     2. If you decide to purchase a puppy, only purchase one from a dog breeder who is able to demonstrate that they are breeding dogs responsibly and humanely, and are producing excellent companion dogs. This website is designed to help you find such a breeder, and maximize the chances that the puppy you choose will develop into the simpatico dog that you hope for. Don\'t purchase a dog from a "middleman" such as a pet store, or a puppy broker. Many seemingly legitimate websites that offer puppies for sale are actually puppy brokers. When you buy from a broker or middleman, the accountability of the actual breeder is lost, and it is difficult to know whether that cute puppy you buy was responsibly and humanely bred, or whether it is actually the product of a profit-motivated, irresponsible and sometimes inhumane breeding operation. Furthermore, you have no idea what that puppy\'s health and temperament will be as an adult. Please do not use your dollars to support irresponsible breeding.
 
@@ -258,6 +308,16 @@ breeds = [
       { :name => 'Shihpoo (Shih Tzu x Poodle)' }]
 
 
+# newsletter_users = [
+#     {:email => 'nu1@gmail.com', :created_at => DateTime.now, :updated_at => DateTime.now},
+#     {:email => 'nu2@gmail.com', :created_at => DateTime.now, :updated_at => DateTime.now},
+#     {:email => 'nu3@gmail.com', :created_at => DateTime.now, :updated_at => DateTime.now},
+#     {:email => 'nu4@gmail.com', :created_at => DateTime.now, :updated_at => DateTime.now}]
+
+# newsletter_users.each do |nl_user|
+#   NewsletterUser.create!(nl_user)
+# end
+
 breeders.each do |breed|
   Breeder.create!(breed)
 end
@@ -266,15 +326,25 @@ breeds.each do |breed|
   Breed.create!(breed)
 end
 
-pups.each do |pup|
-  Pup.create!(pup)
-end
+# pups.each do |pup|
+#   Pup.create!(pup)
+# end
 
-comments.each do |comment|
-  Comment.create!(comment)
-end
+# comments.each do |comment|
+#   Comment.create!(comment)
+# end
 
 texts.each do |text|
   Text.create!(text)
 end
 
+# AdminUser.create!(:email => 'admin@berkeley.edu', :password => 'password', :password_confirmation => 'password')
+
+Feedback.create!(
+  :open_response => 'I love this site!',
+  :rate_dog => 3,
+  :breed_rating => 3,
+  :breeder_rating => 4,
+  :search_breeder => 2,
+  :forum => 1
+)

@@ -1,11 +1,11 @@
 Ratemypup::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
-
+  config.eager_load = true
   # Code is not reloaded between requests
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -28,6 +28,7 @@ Ratemypup::Application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
+  config.log_level = :debug
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
@@ -65,4 +66,21 @@ Ratemypup::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  require "#{Rails.root}/lib/smtp_tls"
+
+  config.action_mailer.default_url_options = { :host => 'simpatico-pup.herokuapp.com' }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true 
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address => "smtp.gmail.com",
+    :port => 587,
+    :domain => "gmail.com",
+    :authentication => :plain,
+    :user_name => "simpatico.pup1@gmail.com",
+    :password => "incoming-plunder-jarful",
+    :enable_starttls_auto => false
+  }
+  
 end
