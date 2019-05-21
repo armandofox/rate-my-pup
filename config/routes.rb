@@ -1,13 +1,40 @@
 Ratemypup::Application.routes.draw do
+
+  get 'feedback/index'
+
+  get 'feedback/new'
+
+  get 'feedback/show'
+
+  get 'feedback/thanks'
+
+  mount Rich::Engine => '/rich', :as => 'rich'
+  # get 'password_resets/new'
+
+  # get 'password_resets/edit'
+
+  mount Thredded::Engine => '/forum'
+  devise_for :users, controllers: {sessions: "sessions", registrations: 'users/registrations'}
+
+  # namespace :users do
+  #   get '/pups' => 'users#pups', :as => :user_pups
+  # end
+
+  get '/users/pups' => 'users#pups', :as => :user_pups
+  devise_scope :user do
+    get '/users/unsubscribe' => 'users/registrations#unsubscribe_newsletter', :as => :unsubscribe_newsletter
+    post '/users/update_subscription' => 'users/registrations#update_subscription', :as => :update_subscription
+  end
+
   root :to => 'pups#main'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  devise_for :users
-  ActiveAdmin.routes(self)
+  # devise_for :users, controllers: { registrations: 'users/registrations'}
+  # ActiveAdmin.routes(self)
 
-  match '/pups/create' => 'pups#create', :as => :create_pup
+  match '/pups/create' => 'pups#create', :as => :create_pup, via: [:get, :post]
   # match '/breeders/create' => 'breeders#create', :as => :create_breeder
   post 'breeders' => 'breeders#create', :as => :create_breeder
   get 'pups/dog_name' => 'pups#dog_name', :as => :dog_name
@@ -15,21 +42,42 @@ Ratemypup::Application.routes.draw do
   get 'pups/dog_breed' => 'pups#dog_breed', :as => :dog_breed
   get 'pups/dog_breeder' => 'pups#dog_breeder', :as => :dog_breeder
 
+  get 'pups/hashtags' => 'pups#hashtags', :as => :dog_hashtags
+  get 'pups/random_comment' => 'pups#random_comment', :as => :dog_random_comment
+  get 'pups/ratings' => 'pups#ratings', :as => :dog_ratings
+  get 'pups/breed_avg_ratings' => 'pups#breed_avg_ratings', :as => :breed_avg_ratings
+
+  # resources :feedback
   resources :pups
   resources :breeders
   resources :texts
+  resources :passwordresets
+  # activate account
+  resources :account_activations, only: [:edit]
+
+  get '/activate/:email' => 'account_activations#send_mail', :as => :activate, :constraints => { :email => /.+@.+\..*/ }
+
+  get '/feedback' => 'feedback#new', :as => :feedback
+  post '/feedback/create' => 'feedback#create', :as => :create_feedback
+  get '/feedback/thanks' => 'feedback#thanks', :as => :thanks_feedback
 
   get '/breed' => 'pups#breed', :as => :breed
   get '/breed/match' => 'pups#search_breed', :as => :breed_search
   get '/breeder/search_name' => 'breeders#search_name', :as => :breeder_search
   get '/breeder/match' => 'breeders#search_breeder', :as => :breeder_substring_match
-  
+  get '/search_nearer_breeders' => 'breeders#search_nearer_breeders', as: :search_nearer_breeders
+  get '/nearer_breeders' => 'breeders#nearer_breeders', as: :nearer_breeders
+
   get '/text/mission' => 'texts#mission', :as => :text_mission
   get '/text/background' => 'texts#background', :as => :text_background
   get '/text/goals' => 'texts#goals', :as => :text_goals
   get '/text/how_you_can_help' => 'texts#how_you_can_help', :as => :text_how_you_can_help
+  get '/text/privacy_policy' => 'texts#privacy_policy', :as => :privacy_policy
+  get '/text/terms_of_service' => 'texts#terms_of_service', :as => :terms_of_service
   get '/welcome' => 'texts#welcome', :as => :welcome
-  
+
+  get "*path" => redirect("/")
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
   # Sample of regular route:

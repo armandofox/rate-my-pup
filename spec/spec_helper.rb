@@ -4,6 +4,7 @@ CodeClimate::TestReporter.start
 require 'simplecov'
 SimpleCov.start 'rails' do
   add_filter "/app/admin/"
+  add_filter "/lib/"
 end
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -22,7 +23,7 @@ RSpec.configure do |config|
   # config.mock_with :mocha
   # config.mock_with :flexmock
   # config.mock_with :rr
-
+  
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
@@ -41,7 +42,12 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+  
+  #config.render_views = true 
 
   # For Devise Helpers
   config.include Devise::TestHelpers, type: :controller
+  
+  config.include ApplicationHelper
+
 end

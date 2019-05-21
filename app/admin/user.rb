@@ -1,7 +1,12 @@
 ActiveAdmin.register User do
+  
+  menu :priority => 13
+  
   filter :username
   filter :created_at
   filter :last_sign_in_at
+  actions :all, except: [:update, :edit, :new]
+  config.batch_actions = false
 
   index do
     column :id
@@ -24,6 +29,7 @@ ActiveAdmin.register User do
       row :created_at
       row :updated_at
       row :agreement
+      row :activated
       panel "Dogs" do
         table_for user.pups do
           column :dog_name do |p|

@@ -1,0 +1,31 @@
+%div{:class => "container breeders-list"}
+
+  %h1 Search for a Breeder
+
+  - flash.each do |key, value|
+    %p= value
+
+  = form_tag nearer_breeders_path, :class => "form-horizontal", :autocomplete => "off", method: "get", remote: true do
+    %div{:class => "form-group"}
+      = label :breeder, :breed_name, "Select Breed"
+      = select :breeder, :breed_name,  @breeds.collect {|p| p.name }, {prompt: 'Any Breed'}, :class => "form-control"
+    %div{:class => "form-group"}
+      = label :breeder, :state, "Find Breeders Near"
+      = text_field :breeder, :city, :maxlength => 140, :class => "form-control", :placeholder => "Enter City"
+      %br
+      %br
+      = select :breeder, :state, options_for_select(@states.collect{ |s| [s, s[0,2]] }), {prompt: 'Select state'}, :class => "form-control"
+    %div{:class => "form-group"}
+      = label :breeder, :search_distance, "Search Range (miles)"
+      = select :breeder, :search_distance, options_for_select({"Any" => 9999,"100" => 100, "250" => 250, "500" => 500}, 9999), :class => "form-control"
+      %br
+    %div{:class => "form-group col-sm-5"}
+      = submit_tag 'Search for a Breeder', :id => 'Search_Breeder', :class => "form-control"
+    .col-sm-1
+    .col-sm-5.form-group
+      = link_to 'Cancel', dog_breeder_path, :class => "form-control cancel"
+  %br
+  %br
+  %br
+
+  %div{id: "list-breeders"}
